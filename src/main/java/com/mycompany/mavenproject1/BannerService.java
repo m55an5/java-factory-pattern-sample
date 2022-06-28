@@ -7,7 +7,9 @@ package com.mycompany.mavenproject1;
 
 import com.mycompany.entities.Banner;
 import com.mycompany.libs.AdServerFileTypes;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -31,6 +33,50 @@ public class BannerService {
         rf.readFile();
         this.setBanners(((BannerFileReader) rf).getBanners());
         
+    }
+    
+    public ArrayList<Banner> getBannersObjForCampaign(int campaignId, int max) {
+        ArrayList<Banner> tmpBanners = new ArrayList<>();
+        
+        int counter = 0;
+        
+        for(Map.Entry<Integer, Banner> set: this.getBanners().entrySet()) {
+            if(set.getValue().getCampaignId() == campaignId) {
+                if(counter < max) {
+                    tmpBanners.add(set.getValue());
+                    counter++;
+                }
+            }
+        }
+        
+        return tmpBanners;
+    }
+    
+    
+    public ArrayList<Integer> getBannersIDForCampaign(int campaignId, int max) {
+        ArrayList<Integer> tmpBanners = new ArrayList<>();
+        
+        int counter = 0;
+        
+        for(Map.Entry<Integer, Banner> set: this.getBanners().entrySet()) {
+            if(set.getValue().getCampaignId() == campaignId) {
+                if(counter < max) {
+                    tmpBanners.add(set.getValue().getBannerId());
+                    counter++;
+                }
+            }
+        }
+        
+        return tmpBanners;
+    }
+    
+    
+    
+    public void printCampaingsList(ArrayList<Banner> bannersList) {
+        
+        bannersList.forEach(banner -> {
+            System.out.println(banner.toString());
+        });
     }
     
 

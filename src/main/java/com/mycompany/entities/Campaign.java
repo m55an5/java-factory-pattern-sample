@@ -81,5 +81,10 @@ public class Campaign {
     public int getPriority() {
         return priority;
     }
+    
+    @Override
+    public String toString() {
+        return "Campaign{" + "campaignId=" + campaignId + ", name=" + name + ", advertiserId=" + advertiserId + ", active=" + active + ", priority=" + priority + '}';
+    }
 
 }

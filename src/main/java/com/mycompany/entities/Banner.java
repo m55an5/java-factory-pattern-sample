@@ -64,4 +64,9 @@ public class Banner {
         return endDate;
     }
     
+    @Override
+    public String toString() {
+        return "\tBanner{" + "bannerId=" + bannerId + ", campaignId=" + campaignId + ", url=" + url + '}';
+    }
+    
 }

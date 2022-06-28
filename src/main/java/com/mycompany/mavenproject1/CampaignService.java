@@ -50,10 +50,10 @@ public class CampaignService {
         return activeCampaigns;
     }
     
-    public ArrayList<Campaign> activeByStatusAndDate(Date date, boolean sort) {
+    public ArrayList<Campaign> activeByStatusAndDate(Date date, boolean sort, int max) {
         ArrayList<Campaign> activeCampaigns = new ArrayList<>();
         
-        System.out.println("Date: " + date);
+//        System.out.println("Date: " + date);
         this.campaigns.forEach((key, campaign) -> {
             if(campaign.getEndDate().after(date)) {
                 activeCampaigns.add(campaign);
@@ -64,10 +64,17 @@ public class CampaignService {
             Collections.sort(activeCampaigns, 
                         Comparator.comparing(Campaign::getPriority).reversed());
         }
-        printCampaingsList(activeCampaigns);
+                
+        if (activeCampaigns.size() >= max) {    
+            ArrayList<Campaign> tmpList = 
+                    new ArrayList<>(activeCampaigns.subList(0, max));
+            return tmpList;
+        } else {
+            return activeCampaigns;
+        }
         
-        return activeCampaigns;
     }
+ 
     
     public void printCampaingsList(ArrayList<Campaign> campaignsList) {
         
